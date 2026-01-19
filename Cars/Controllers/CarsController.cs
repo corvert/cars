@@ -1,5 +1,7 @@
-﻿using Cars.Models.Cars;
+﻿using Cars.Data;
+using Cars.Models.Cars;
 using Microsoft.AspNetCore.Mvc;
+using Cars.Core;
 
 namespace Cars.Controllers
 {
@@ -13,7 +15,7 @@ namespace Cars.Controllers
 
         public IActionResult Index()
         {
-            var result = _context.Cars.Select(x => new CarsIndexViewModel
+            var result = _context.CarsDB.Select(x => new CarsIndexViewModel
             {
                 Id = x.Id,
                 Make = x.Make,
