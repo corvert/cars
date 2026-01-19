@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Cars.Core.Domain;
+
 
 namespace Cars.Data
 {
     public class CarsContext :DbContext
     {
+        public CarsContext(DbContextOptions<CarsContext> options) : base(options) { }
 
-        public DbSet<Cars> Cars { get; set; }
+        public DbSet<Car> CarsDB { get; set; }
     }
 }
