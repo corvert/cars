@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cars.Core.Domain
 {
-    public class Cars
+    public class Car
     {
         public Guid Id { get; set; }
         public string Make { get; set; }
