@@ -69,18 +69,7 @@ namespace Cars.Controllers
             {
                 return NotFound();
             }
-            var vm = new CarsDetailsDeleteViewModel
-            {
-                Id = car.Id,
-                Make = car.Make,
-                Model = car.Model,
-                Color = car.Color,
-                Doors = car.Doors,
-                FuelType = car.FuelType,
-                ModifiedAt = car.ModifiedAt,
-                CreatedAt = car.CreatedAt,
-               
-            };
+            CarsDetailsDeleteViewModel vm = ConvertCarToCarsDetailsViewModel(car);
             vm.ShowDeleteBtn = true;
             return View("DeleteDetails", vm);
         }
@@ -130,6 +119,33 @@ namespace Cars.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var car = await _carServices.DetailsAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+            CarsDetailsDeleteViewModel vm = ConvertCarToCarsDetailsViewModel(car);
+            vm.ShowDeleteBtn = false;
+            return View("DeleteDetails", vm);
+        }
+
+        private static CarsDetailsDeleteViewModel ConvertCarToCarsDetailsViewModel(Core.Domain.Car car)
+        {
+            return new CarsDetailsDeleteViewModel
+            {
+                Id = car.Id,
+                Make = car.Make,
+                Model = car.Model,
+                Color = car.Color,
+                Doors = car.Doors,
+                FuelType = car.FuelType,
+                ModifiedAt = car.ModifiedAt,
+                CreatedAt = car.CreatedAt,
+            };
+        }
 
         private static CarsDto ConvertFromViewModelToDto(CarsCreateUpdateViewModel vm)
         {

@@ -63,13 +63,13 @@ else
 		<div class="col-12 d-flex gap-2">
 			@if (Model.Id != Guid.Empty)
 			{
-				<button type="submit" class="btn btn-primary">Update</button>
+				<button type="submit" class="btn btn-outline-primary">Update</button>
 			}
 			else
 			{
-				<button type="submit" class="btn btn-primary">Create</button>
+				<button type="submit" class="btn btn-outline-primary">Create</button>
 			}
-			<a asp-action="Index" asp-controller="Cars" class="btn btn-outline-secondary">Back</a>
+			|<a asp-action="Index" asp-controller="Cars" class="btn btn-outline-secondary">Back</a>
 		</div>
 	</form>
 </div>

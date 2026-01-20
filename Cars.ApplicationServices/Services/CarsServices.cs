@@ -60,6 +60,12 @@ namespace Cars.ApplicationServices.Services
             return newCar;
         }
 
+        public async Task<Car> Details(Guid id)
+        {
+            var result = await _context.CarsDB.FirstOrDefaultAsync(x => x.Id == id);
+            return result;
+        }
+
 
 
 
