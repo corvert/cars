@@ -1,0 +1,79 @@
+﻿@model Cars.Models.Cars.CarsCreateViewModel
+
+@if (Model.Id != Guid.Empty)
+{
+	<h1 class="h3 mb-3">Update Car</h1>
+}
+else
+{
+	<h1 class="h3 mb-3">Create Car</h1>
+}
+
+
+<div class="card card-modern p-3">
+	<form method="post" enctype="multipart/form-data" class="row g-3">
+		<input asp-for="Id" type="hidden" />
+		<input asp-for="CreatedAt" type="hidden" />
+
+		<div asp-validation-summary="ModelOnly" class="text-danger col-12"></div>
+
+		<div class="col-12 col-md-6">
+			<div class="form-floating">
+				<input asp-for="Make" class="form-control" id="make" placeholder="Make" />
+				<label for="make">Make</label>
+				<span asp-validation-for="Make" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-6">
+			<div class="form-floating">
+				<input asp-for="Model" class="form-control" id="model" placeholder="Model" />
+				<label for="model">Model</label>
+				<span asp-validation-for="Model" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-4">
+			<div class="form-floating">
+				<input asp-for="Color" class="form-control" id="color" placeholder="Color" />
+				<label for="color">Color</label>
+				<span asp-validation-for="Color" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-4">
+			<div class="form-floating">
+				<input asp-for="Doors" class="form-control" id="doors" placeholder="Doors" />
+				<label for="doors">Doors</label>
+				<span asp-validation-for="Doors" class="text-danger"></span>
+			</div>
+		</div>
+
+
+		<div class="col-12 col-md-4">
+			<div class="form-floating">
+				<input asp-for="FuelType" class="form-control" id="fuelType" placeholder="Fuel Type" />
+				<label for="fuelType">Fuel Type</label>
+				<span asp-validation-for="FuelType" class="text-danger"></span>
+			</div>
+		</div>
+
+
+
+		<div class="col-12 d-flex gap-2">
+			@if (Model.Id != Guid.Empty)
+			{
+				<button type="submit" class="btn btn-primary">Update</button>
+			}
+			else
+			{
+				<button type="submit" class="btn btn-primary">Create</button>
+			}
+			<a asp-action="Index" asp-controller="Cars" class="btn btn-outline-secondary">Back</a>
+		</div>
+	</form>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -19,4 +19,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cars.Data\Cars.Data.csproj" />
+  </ItemGroup>
+
 </Project>

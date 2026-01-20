@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cars.ApplicationServices\Cars.ApplicationServices.csproj" />
     <ProjectReference Include="..\Cars.Data\Cars.Data.csproj" />
   </ItemGroup>
 
