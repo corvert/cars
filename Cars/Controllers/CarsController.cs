@@ -67,5 +67,39 @@ namespace Cars.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var car = await _carServices.DetailsAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+            var vm = new CarsDetailsDeleteViewModel
+            {
+                Id = car.Id,
+                Make = car.Make,
+                Model = car.Model,
+                Color = car.Color,
+                Doors = car.Doors,
+                FuelType = car.FuelType,
+                CreatedAt = car.CreatedAt,
+               
+            };
+            vm.ShowDeleteBtn = true;
+            return View("DeleteDetails", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var result = await _carServices.Delete(id);
+            if (result == null)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
-    }
+}

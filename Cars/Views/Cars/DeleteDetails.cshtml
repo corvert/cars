@@ -1,0 +1,42 @@
+﻿@model Cars.Models.Cars.CarsDetailsDeleteViewModel
+
+@if (Model.ShowDeleteBtn)
+{
+	<h1>Delete Car</h1>
+}
+else
+{
+	<h1>Car details</h1>
+}
+
+<div class="card mb-3 shadow-sm">
+	<div class="card-body">
+		<h2 class="card-title">@Model.Make @Model.Model</h2>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<ul class="list-unstyled">
+					<li><strong>Color:</strong> @Model.Color</li>
+					<li><strong>Doors:</strong> @Model.Doors</li>
+					<li><strong>Fuel:</strong> @Model.FuelType</li>
+					<li><strong>Created:</strong> @Model.CreatedAt</li>
+
+				</ul>
+			</div>
+
+		</div>
+		@if (Model.ShowDeleteBtn)
+		{
+			<form asp-action="DeleteConfirmation">
+				<input type="hidden" asp-for="Id" />
+				<input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" />
+				|
+				<a asp-action="Index" asp-controller="cars" class="btn btn-sm btn-outline-success"> Back </a>
+			</form>
+		}
+		else
+		{
+			<a asp-action="Index" asp-controller="cars" class="btn btn-sm btn-outline-success">Back</a>
+		}
+	</div>
+</div>
