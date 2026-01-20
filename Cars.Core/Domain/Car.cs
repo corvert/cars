@@ -16,6 +16,7 @@ namespace Cars.Core.Domain
         public string Color { get; set; }
         public int Doors { get; set; }
         public string FuelType { get; set; }
+        public DateTime? ModifiedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
 
 

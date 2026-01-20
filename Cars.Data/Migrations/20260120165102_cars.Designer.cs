@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cars.Data.Migrations
 {
     [DbContext(typeof(CarsContext))]
-    [Migration("20260119182318_cars")]
+    [Migration("20260120165102_cars")]
     partial class cars
     {
         /// <inheritdoc />
@@ -52,6 +52,9 @@ namespace Cars.Data.Migrations
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

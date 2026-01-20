@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Cars.Models.Cars
 {
-    public class CarsCreateViewModel
+    public class CarsCreateUpdateViewModel
     {
         public Guid Id { get; set; }
         
@@ -23,7 +23,8 @@ namespace Cars.Models.Cars
      
         [Required(ErrorMessage = "Fuel type is required")]
         public string FuelType { get; set; }
-        
+        public DateTime? ModifiedAt { get; set; }
+
         public DateTime? CreatedAt { get; set; }
     }
 }

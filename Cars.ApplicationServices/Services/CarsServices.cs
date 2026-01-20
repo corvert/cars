@@ -22,6 +22,8 @@ namespace Cars.ApplicationServices.Services
         public async Task<Car> Create (CarsDto dto)
         {
             Car newCar = CreateCarFromDto(dto);
+            newCar.ModifiedAt = DateTime.Now;
+            newCar.CreatedAt = DateTime.Now;
 
             await _context.CarsDB.AddAsync(newCar);
             await _context.SaveChangesAsync();
@@ -48,17 +50,30 @@ namespace Cars.ApplicationServices.Services
             return carToDelete;
         }
 
+        public async Task<Car> Update(CarsDto dto)
+        {
+            Car newCar = CreateCarFromDto(dto);
+            newCar.ModifiedAt = DateTime.Now;
+
+            _context.CarsDB.Update(newCar);
+            await _context.SaveChangesAsync();
+            return newCar;
+        }
+
+
+
 
         private static Car CreateCarFromDto(CarsDto dto)
         {
             Car newCar = new Car();
-            newCar.Id = Guid.NewGuid();
+            newCar.Id = dto.Id;
             newCar.Make = dto.Make;
             newCar.Model = dto.Model;
             newCar.Color = dto.Color;
             newCar.Doors = dto.Doors;
             newCar.FuelType = dto.FuelType;
-            newCar.CreatedAt = DateTime.UtcNow;
+            newCar.CreatedAt = dto.CreatedAt;
+
             return newCar;
         }
     }

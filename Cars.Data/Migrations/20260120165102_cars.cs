@@ -21,6 +21,7 @@ namespace Cars.Data.Migrations
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Doors = table.Column<int>(type: "int", nullable: false),
                     FuelType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>

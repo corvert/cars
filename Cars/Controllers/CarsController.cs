@@ -29,6 +29,7 @@ namespace Cars.Controllers
                 Color = x.Color,
                 Doors = x.Doors,
                 FuelType = x.FuelType,
+                ModifiedAt = x.ModifiedAt,
                 CreatedAt = x.CreatedAt,
             });
             return View(result);
@@ -37,25 +38,15 @@ namespace Cars.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            CarsCreateViewModel result = new();
+            CarsCreateUpdateViewModel result = new();
             return View("CreateUpdate", result);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(CarsCreateViewModel vm)
+        public async Task<IActionResult> Create(CarsCreateUpdateViewModel vm)
         {
-            var dto = new CarsDto()
-            {
-                Id = vm.Id,
-                Make = vm.Make,
-                Model = vm.Model,
-                Color = vm.Color,
-                Doors = vm.Doors,
-                FuelType = vm.FuelType,
-                CreatedAt = vm.CreatedAt,
-
-            };
+            CarsDto dto = ConvertFromViewModelToDto(vm);
 
             var result = await _carServices.Create(dto);
 
@@ -67,6 +58,9 @@ namespace Cars.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+      
+
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -83,6 +77,7 @@ namespace Cars.Controllers
                 Color = car.Color,
                 Doors = car.Doors,
                 FuelType = car.FuelType,
+                ModifiedAt = car.ModifiedAt,
                 CreatedAt = car.CreatedAt,
                
             };
@@ -101,5 +96,57 @@ namespace Cars.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var car = await _carServices.DetailsAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+            var vm = new CarsCreateUpdateViewModel();
+            vm.Id = car.Id;
+            vm.Make = car.Make;
+            vm.Model = car.Model;
+            vm.Color = car.Color;
+            vm.Doors = car.Doors;
+            vm.FuelType = car.FuelType;
+            vm.ModifiedAt = DateTime.Now;
+            vm.CreatedAt = car.CreatedAt;
+            return View("CreateUpdate", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(CarsCreateUpdateViewModel vm)
+        {
+            CarsDto dto = ConvertFromViewModelToDto(vm);
+            var result = await _carServices.Update(dto);
+            if (result != null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
+        private static CarsDto ConvertFromViewModelToDto(CarsCreateUpdateViewModel vm)
+        {
+            return new CarsDto()
+            {
+                Id = vm.Id,
+                Make = vm.Make,
+                Model = vm.Model,
+                Color = vm.Color,
+                Doors = vm.Doors,
+                FuelType = vm.FuelType,
+                ModifiedAt = vm.ModifiedAt,
+                CreatedAt = vm.CreatedAt,
+
+            };
+        }
+
+
     }
 }
