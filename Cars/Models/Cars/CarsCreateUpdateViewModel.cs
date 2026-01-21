@@ -23,7 +23,9 @@ namespace Cars.Models.Cars
      
         [Required(ErrorMessage = "Fuel type is required")]
         public string FuelType { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm:ss}")]
         public DateTime? ModifiedAt { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm:ss}")]
 
         public DateTime? CreatedAt { get; set; }
     }
